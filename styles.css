@@ -1,0 +1,21 @@
+.bigPillar {
+    width: 50vw;
+    height: 90vh;
+    overflow-y: auto;
+
+}
+
+#firstPillar {
+    background-color: bisque;
+    position: absolute;
+    top: 0;
+    left: 0vw;
+
+}
+
+#secondPillar {
+    background-color: #e0b0ff;
+    position: absolute;
+    top: 0;
+    left: 50vw;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="bigPillar" id="firstPillar"></div>
+    <div class="bigPillar" id="secondPillar"></div>
+    <script>
+        // From http://foo.com/
+
+        let div = document.createElement("div")
+        let div2 = document.createElement("div")
+        let tbl = document.getElementById('firstPillar');
+        let tbl2 = document.getElementById('secondPillar');
+
+        div.style.position = "absolute"
+        div.style.left = "50%"
+        div.style.textAlign = "center"
+        div.style.lineHeight = "10vh"
+        div.style.top = "90vh"
+        div.style.width = "200px"
+        div.style.height = "10vh"
+        div.style.backgroundColor = "bisque"
+        div.innerHTML = "Search"
+
+        div2.style.position = "absolute"
+        div2.style.left = "50%"
+        div2.style.marginLeft = "-200px"
+        div2.style.textAlign = "center"
+        div2.style.lineHeight = "10vh"
+        div2.style.top = "90vh"
+        div2.style.width = "200px"
+        div2.style.height = "10vh"
+        div2.style.backgroundColor = "#e0b0ff"
+        div2.innerHTML = "Chose Target"
+
+        div.addEventListener("click", async function () {
+            let mails = document.createElement('div');
+            mails.innerHTML += `<h1>E-Mail</h1>`
+            let webs = document.createElement('div');
+            webs.innerHTML += `<h1>Uniform Resource Locator</h1>`
+            fetch('http://127.0.0.1:3000/getData')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    for (let i = 0; i < data.mails.length; i++) {
+                        mails.innerHTML += `<p>* ${data.mails[i]}</p>`
+                    }
+
+                    for (let i = 0; i < data.webs.length; i++) {
+                        webs.innerHTML += `<p>* ${data.webs[i]}</p>`
+                    }
+                })
+
+            tbl.innerHTML = ""
+            tbl.append(mails)
+            tbl2.innerHTML = ""
+            tbl2.append(webs)
+
+
+
+        })
+        div2.addEventListener("click", async function () {
+            let myUrl = prompt("url", "https://www.onet.pl/")
+            let myDeph = prompt("deph", "3")
+            switch (parseInt(myDeph)) {
+                case 1:
+                    alert("ready");
+                    break;
+                case 2:
+                    alert("wait 5 sec");
+                    break;
+                case 3:
+                    alert("wait 15 sec");
+                    break;
+                case 4:
+                    alert("wait under 1 minute");
+                    break;
+                case 5:
+                    alert("wait over 1 minute");
+                    break;
+                default:
+                    alert("number too big");
+                    break;
+            }
+
+            const data = {
+                content: myUrl,
+                deph: myDeph
+            }
+            fetch("http://127.0.0.1:3000/postData",
+                {
+                    method: "POST",
+
+                    body: JSON.stringify(data)
+                })
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    // alert(JSON.stringify(data)) 
+                })
+        })
+        document.body.append(div)
+        document.body.append(div2)
+
+    </script>
+</body>
+
+</html>
