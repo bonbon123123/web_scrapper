@@ -16,14 +16,3 @@
 <image src="/images/scrapper_4.PNG">
 
 
-
-<image src="/images/scrapper_5.PNG">
-
-
-
-<image src="/images/scrapper_6.PNG">
-
-
-
-<image src="/images/scrapper_7.PNG">
-
